@@ -39,9 +39,6 @@ def predict(weather_variable="meantemp", days=7):
 
     forecast = model.predict(df)
 
-    # model.plot(forecast).savefig(f"{weather_variable}_plot.png")
-    # model.plot_components(forecast).savefig(f"{weather_variable}_plot_components.png")
-
     return forecast.tail(days).to_dict("records")
 
 
