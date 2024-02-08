@@ -2,22 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Weather Forecast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Prediction</title>
   </head>
   <body>
-    <body>
-      <h1>Weather Forecast</h1>
-      <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" />
-        <input type="submit" value="Upload Image" />
-      </form>
-      {% if message %}
-      <p>{{ message }}</p>
-      {% endif %} {% if image_label %}
-      <p>Image Label: {{ image_label }}</p>
-      {% endif %} {% if image_path%}
-      <img id="uploaded-image" src="{{ image_path }}" alt="Uploaded Image" />
-      {% endif %}
-    </body>
+    <h1>Weather Prediction</h1>
+    <form action="/predict" method="post">
+      <label for="weather_variable">Weather Variable:</label>
+      <input
+        type="text"
+        id="weather_variable"
+        name="weather_variable"
+        required
+      /><br /><br />
+      <label for="days">Days:</label>
+      <input type="number" id="days" name="days" required /><br /><br />
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if response %} {% for key, value in response.forecast.items() %}
+    <li>{{ key }}: {{ value }}</li>
+    {% endfor %} {% endif %}
   </body>
 </html>

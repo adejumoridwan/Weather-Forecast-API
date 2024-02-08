@@ -9,9 +9,9 @@ TODAY = datetime.date.today()
 DATA_PATH = "DailyDelhiClimateTrain.csv"
 
 
-def train(weather_variable="meantemp"):
+def train(weather_variable="temperature"):
     data = pd.read_csv(DATA_PATH)
-    data.head()
+    data.columns = ["date", "temperature", "humidity", "wind_speed", "pressure"]
     df_forecast = data.copy()
     df_forecast["ds"] = df_forecast["date"]
     df_forecast["y"] = df_forecast[weather_variable]
@@ -23,7 +23,7 @@ def train(weather_variable="meantemp"):
     joblib.dump(model, os.path.join(BASE_DIR, f"{weather_variable}.joblib"))
 
 
-def predict(weather_variable="meantemp", days=7):
+def predict(weather_variable="temperature", days=7):
 
     model_file = os.path.join(BASE_DIR, f"{weather_variable}.joblib")
 
