@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request, Form
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
 import uvicorn
 
@@ -11,15 +10,9 @@ templates = Jinja2Templates(directory="templates")
 app = FastAPI()
 
 
-# Pydantic Models
-class WeatherVariable(BaseModel):
-    weather_variable: str
-    days: int
-
-
 # Routes
 @app.get("/", response_class=HTMLResponse)
-def go_to_page(request: Request):
+def home_page(request: Request):
     return templates.TemplateResponse(request, "index.html")
 
 
