@@ -12,7 +12,7 @@ def test_read_main():
 
 def test_predict():
     response = client.post(
-        "/predict", data={"weather_variable": "temperature", "days": 5}
+        "/predict", data={"weather_variable": "temperature", "days": 7}
     )
     assert response.status_code == 200
     assert "text/html" in response.headers["content-type"]
